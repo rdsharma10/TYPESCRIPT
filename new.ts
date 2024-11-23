@@ -137,3 +137,44 @@ async function main(): Promise<void> {
 }
 
 main();
+
+
+
+
+// Function to simulate fetching data from an API
+async function fetchData(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Data fetched successfully!"); // Resolves after 2 seconds
+    }, 2000);
+  });
+}
+
+// Function to simulate fetching user details
+async function fetchUser(): Promise<{ id: number; name: string }> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ id: 42, name: "Alice" }); // Resolves after 1 second
+    }, 1000);
+  });
+}
+
+// Main function to demonstrate async/await
+async function main(): Promise<void> {
+  console.log("Fetching data...");
+  
+  try {
+    const data = await fetchData(); // Waits for fetchData to resolve
+    console.log(data);
+
+    console.log("Fetching user details...");
+    const user = await fetchUser(); // Waits for fetchUser to resolve
+    console.log(`User fetched: ${user.name} (ID: ${user.id})`);
+  } catch (error) {
+    console.error("An error occurred:", error); // Handles any potential error
+  }
+}
+
+// Call the main function
+main();
+
