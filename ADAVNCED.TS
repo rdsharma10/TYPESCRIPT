@@ -93,3 +93,86 @@ export function validate(target: any, propertyKey: string, descriptor: PropertyD
 
     return descriptor;
 }
+
+
+
+
+
+type IdDisplay = {
+id: string,
+display: string
+}
+const list: IdDisplay[] = [
+{
+id: 'foo',
+display: 'Foo Select'
+},
+{
+id: 'bar',
+display: 'Bar Select'
+},
+]
+const fooIndex = list.map(i => i.id).indexOf('foo');
+console.log(fooIndex); /
+
+
+
+
+function outerFunction(arg) {
+var variableInOuterFunction = arg;
+function bar() {
+console.log(variableInOuterFunction); // Access a variable from the outer scope
+}
+// Call the local function to demonstrate that it has access to arg
+bar();
+}
+outerFunction("hello closure"); // logs hello closure!
+
+
+
+
+function createCounter() {
+let val = 0;
+return {
+increment() { val++ },
+getVal() { return val }
+}
+}
+let counter = createCounter();
+counter.increment();
+console.log(counter.getVal()); // 1
+counter.increment();
+console.log(counter.getVal()); //
+
+
+// Safe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER)); // true
+// Unsafe value
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)); // false
+// Because it might have been rounded to it due to overflow
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 10)); // false
+
+
+
+
+
+
+class FooBase {
+public x: number;
+private y: number;
+protected z: number;
+}
+// EFFECT ON INSTANCES
+var foo = new FooBase();
+foo.x; // okay
+foo.y; // ERROR : private
+foo.z; // ERROR : protected
+// EFFECT ON CHILD CLASSES
+class FooChild extends FooBase {
+constructor() {
+super();
+this.x; // okay
+this.y; // ERROR: private
+this.z; // okay
+}
+}
